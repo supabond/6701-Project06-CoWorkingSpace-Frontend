@@ -1,0 +1,17 @@
+.banner {
+    display: block;
+    /* padding: 50px; */
+    margin: 0;
+    width: 100vw;
+    height: 80vh;
+    position: relative;
+    background-color: black;
+}
+
+.bannerText {
+    position: relative;
+    top: 40px;
+    z-index: 20;
+    text-align: center;
+    text-shadow: 1px 1px 0px rgb(255, 255, 255);
+}
