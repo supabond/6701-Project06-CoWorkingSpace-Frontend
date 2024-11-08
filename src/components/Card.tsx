@@ -9,7 +9,7 @@ export default function Card( {hospitalName, imgSrc, onRating}:{hospitalName:str
                 <Image src={imgSrc}
                     alt='Product Picture'
                     fill = {true}
-                    className = 'object-cover object-top rounded-t-lg'
+                    className = 'object-cover object-top rounded-t-md'
                 />
             </div>
             <div className='w-full h-[25%] p-2.5'>

@@ -15,8 +15,8 @@ export default function Hospital() {
                     <LinearProgress/>
                 </div>
                 }>
-                <div className="text-xl font-medium" style={{padding:"30px 35px 5px 35px"}}>
-                    Hospital :
+                <div className="text-lg text-gray-500 font-light mt-24 text-center">
+                    Click on the co-working space to see more details and book.
                 </div>
                 <HospitalCatalog hospitalsJson = {hospitals}/>
             </Suspense>

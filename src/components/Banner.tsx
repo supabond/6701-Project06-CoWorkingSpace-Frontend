@@ -6,40 +6,49 @@ import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 export default function Banner() {
-    const covers = ['/img/cover.jpg', '/img/cover2.jpg', '/img/cover3.jpg', '/img/cover4.jpg' ];
-    const [index, setIndex] = useState(0);
     const router = useRouter();
 
     const {data: session} = useSession();
 
+    // return(
+    //     <div className="relative">
+    //         <div className="w-[100%] h-40 bg-black absolute "></div>
+    //         <div className="w-[50%] z-3 h-20 bg-yellow-300 relative "></div>
+    //         <div className='w-20 h-20 z-2 bg-red-200 relative'></div>
+    //     </div>
+    // )
+
     return (
-        <div className = {styles.banner} onClick = {() => { setIndex(index+1)}}>
-            <div>
-                <Image src={covers[index % covers.length]} 
+        <div className = "w-[100vw] h-[100vh] relative bg-white">
+            <div className='w-[80%] h-full absolute right-0'>
+                <Image src='/img/5541.jpg' 
                 alt='cover' 
                 fill={true} 
                 priority
-                objectFit='cover'/>
+                objectFit='cover'
+                // objectPosition='right'
+                />
             </div>
 
             { 
                 session ? 
-                <div className='z-20 absolute top-0 right-5 p-2 text-white font-normal'>
+                <div className='z-20 absolute top-0 right-5 p-2 text-black font-normal'>
                     Welcome, {session.user?.name}
                 </div>
                 : null
             }
 
-            <div className = {styles.bannerText}>
-                <h1 className='text-4xl font-medium text-white'>Vaccine Service Center</h1>
-                <h4 className='text-xl font-serif text-white' style={{fontWeight:"normal", marginTop:"10px", textShadow:"none"}}>Join us for vaccination services to protect your health!</h4>
+            <div className="absolute z-20 top-28 left-16">
+                <h1 className='text-5xl font-bold text-blue-700'>COWORKING</h1>
+                <h1 className='text-5xl font-bold text-blue-500'>SPACE</h1>
+                <h4 className='text-base font-light text-black mt-16 text-pretty w-[40%]'>Discover and book the best coworking spaces with ease. Explore flexible options and inspiring communities – all in one place!</h4>
+                <button className='w-48 bg-orange-500 text-white text-lg
+                    font-semibold py-2 px-2 rounded-2xl z-30 absolute mt-20
+                    hover:bg-orange-600'
+                    onClick={(e)=> { e.stopPropagation; router.push('/hospital')}}> 
+                    Get Start!
+                </button>
             </div>
-            <button className='w-48 bg-white text-gray-500 border border-gray-500
-                font-semibold py-4 px-4 m-5 rounded z-30 absolute bottom-0 right-0
-                hover:bg-gray-500 hover:text-white hover:border-transparent'
-                onClick={(e)=> { e.stopPropagation; router.push('/hospital')}}> 
-                Select Hospital
-            </button>
         </div>
     )
 }
