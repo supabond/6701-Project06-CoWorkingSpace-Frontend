@@ -45,7 +45,7 @@ export default function Banner() {
                 <button className='w-48 bg-orange-500 text-white text-lg
                     font-semibold py-2 px-2 rounded-2xl z-30 absolute mt-20
                     hover:bg-orange-600'
-                    onClick={(e)=> { e.stopPropagation; router.push('/hospital')}}> 
+                    onClick={(e)=> { e.stopPropagation; router.push('/coworkingspace')}}> 
                     Get Start!
                 </button>
             </div>

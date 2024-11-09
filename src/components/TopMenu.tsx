@@ -18,14 +18,14 @@ export default async function TopMenu() {
             </Link> 
 
 
-            <TopMenuItem title='Co-working space' pageRef='/booking'/>
+            <TopMenuItem title='Co-working space' pageRef='/coworkingspace'/>
             <TopMenuItem title='My Booking' pageRef='/mybooking'/>
             {/* <Link href="/">
                 <Image src={'/img/logo.png'} className='h-[100%] w-auto p-[3px] hover:bg-gray-400' alt='logo' width={0} height={0} sizes='100vh'/>
             </Link> */}
 
             {session ? 
-                <div className="absolute top-5 right-48 flex justify-end">
+                <div className="absolute top-5 right-44 flex justify-end">
                     <div className='w-24 flex justify-center items-center font-normal  text-base text-gray-400'>
                         {session.user?.name}
                     </div>
