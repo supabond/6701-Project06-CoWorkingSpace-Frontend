@@ -73,7 +73,7 @@ export default async function CoworkingspaceInformation( {params}:{ params: {cid
                             </div>               
                 </div>
             </div>
-            <BookingSection token={session?.user.token || ''}/>
+            <BookingSection token={session?.user.token || ''} cid={params.cid}/>
         </main>
     )
 }

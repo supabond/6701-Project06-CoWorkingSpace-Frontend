@@ -1,7 +1,10 @@
 'use client'
 import React from 'react'
-
+import { useAppSelector } from '@/redux/store'
 export default function InteractiveCard({children}:{children: React.ReactNode}) {
+
+    const roleColor = useAppSelector( (state) => state.colorSlice )
+
     function onCardMouseAction(event:React.SyntheticEvent)
     {
         if (event.type === 'mouseover'){
@@ -22,7 +25,7 @@ export default function InteractiveCard({children}:{children: React.ReactNode}) 
         }
     }
     return (
-        <div className='w-full h-[300px] bg-white outline outline-2 outline-offset-4 outline-orange-400 border border-2 rounded-md border-gray-300 hover:border-neutral-200' 
+        <div className={`w-full h-[300px] ${roleColor.textDarkColor} bg-white outline outline-2 outline-offset-4 ${roleColor.outlineColor} border border-2 rounded-md border-gray-300 hover:border-neutral-200`}
         onMouseOver={(e)=>onCardMouseAction(e)}
         onMouseOut={(e)=>onCardMouseAction(e)}>
            {children}

@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import postBooking from "@/libs/postBooking";
 import { Slider } from "@mui/material";
 
-export default function BookingSection({token}:{token:string}) {
+export default function BookingSection({token, cid}:{token:string, cid:string}) {
     const [bookDate, setBookDate] = useState<Dayjs | null>(dayjs());
     const [numOfRooms, setNumOfRooms] = useState<number>(1);
     const [showModal, setShowModal] = useState(false);
@@ -19,7 +19,7 @@ export default function BookingSection({token}:{token:string}) {
             return;
         }
         const createdAt = dayjs();
-        const response = await postBooking(bookDate?.format('YYYY-MM-DD') || '', numOfRooms, 'coworkingspace', createdAt.format('YYYY-MM-DD'), token);    
+        const response = await postBooking(bookDate?.format('YYYY-MM-DD') || '', numOfRooms, cid, createdAt.format('YYYY-MM-DD'), token);    
         
     };
 

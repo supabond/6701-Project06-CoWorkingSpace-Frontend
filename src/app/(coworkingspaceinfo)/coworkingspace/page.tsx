@@ -1,5 +1,5 @@
 import getCoworkingspaces from "@/libs/getCoworkingspaces"
-import { Suspense } from "react"
+import { Suspense, useEffect } from "react"
 import { LinearProgress } from "@mui/material"
 import CoworkingspaceCatalog from "@/components/CoworkingspaceCatalog"
 

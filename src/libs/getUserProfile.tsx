@@ -1,6 +1,6 @@
 export default async function getUserProfile(token:string) {
 
-    const response = await fetch( 'https://2110507-vaccine-app-backend-phi.vercel.app:443/api/v1/auth/me', {
+    const response = await fetch( 'http://localhost:5555/api/v1/auth/me', {
         method: 'GET',
         headers: {
             'authorization': `Bearer ${token}`

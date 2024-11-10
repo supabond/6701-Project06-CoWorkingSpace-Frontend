@@ -2,10 +2,12 @@ import InteractiveCard from './InteractiveCard'
 import Image from 'next/image'
 import { Rating } from '@mui/material'
 
-export default function Card( {coworkingspaceName, coworkingspaceAddress, coworkingspaceOperatingHours, imgSrc, onRating}:{coworkingspaceName:string, coworkingspaceAddress:string, coworkingspaceOperatingHours:string, imgSrc:string, onRating?:Function}) {
+
+export default function Card( {coworkingspaceName, coworkingspaceAddress, coworkingspaceOperatingHours, imgSrc, onRating}:
+    {coworkingspaceName:string, coworkingspaceAddress:string, coworkingspaceOperatingHours:string, imgSrc:string,onRating?:Function}) {
     return (
         <InteractiveCard>
-            <div className='w-full h-[60%] relative rounded-t-lg'>
+            <div className='w-full h-[70%] relative rounded-t-lg'>
                 <Image src={imgSrc}
                     alt='Product Picture'
                     fill = {true}
@@ -13,7 +15,7 @@ export default function Card( {coworkingspaceName, coworkingspaceAddress, cowork
                 />
             </div>
             <div className='w-full  px-2.5 mt-2.5'>
-                <div className='h-[100%] overflow-auto text-lg text-left text-orange-700 font-normal'>{coworkingspaceName}</div>
+                <div className={`h-[100%] overflow-auto text-lg text-left font-normal`}>{coworkingspaceName}</div>
             </div>
             <div className='w-full  px-2.5'>
                 <div className='h-[100%] overflow-auto text-left text-sm text-gray-400 font-light'>{coworkingspaceAddress}</div>

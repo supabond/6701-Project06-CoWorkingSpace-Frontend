@@ -1,9 +1,9 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import bookSlice from "./features/bookSlice";
+import { configureStore, combineReducers} from "@reduxjs/toolkit";
+import colorSlice from "./features/colorSlice";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import { WebStorage } from "redux-persist/lib/types";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { WebStorage } from "redux-persist/lib/types";
 
 function createPersistStorage() : WebStorage {
     const isServer = typeof window === 'undefined';
@@ -28,19 +28,20 @@ const storage = createPersistStorage();
 const persistConfig = {
     key: "rootPersist",
     storage
+
 }
 
-const rootReducer = combineReducers({ bookSlice} );
+const rootReducer = combineReducers({ colorSlice} );
 const reduxPersistReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
-    reducer: reduxPersistReducer,
+    reducer:  reduxPersistReducer
+    ,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {
             ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
         }
     })
-
 });
 
 export type RootState = ReturnType<typeof store.getState>;

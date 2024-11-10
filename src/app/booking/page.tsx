@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Dayjs } from "dayjs";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
-import { addBooking } from "@/redux/features/bookSlice";
+import { addBooking } from "@/redux/features/colorSlice";
 import { BookingItem } from "../../../interfaces";
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
