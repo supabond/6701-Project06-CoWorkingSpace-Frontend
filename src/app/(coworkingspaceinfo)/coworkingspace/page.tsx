@@ -1,11 +1,10 @@
-// import CardPanel from "@/components/CardPanel"
-import getHospitals from "@/libs/getHospitals"
-import { Suspense } from "react"
+import getCoworkingspaces from "@/libs/getCoworkingspaces"
+import { Suspense, useEffect } from "react"
 import { LinearProgress } from "@mui/material"
-import HospitalCatalog from "@/components/HospitalCatalog"
+import CoworkingspaceCatalog from "@/components/CoworkingspaceCatalog"
 
-export default function Hospital() {
-    const hospitals = getHospitals()
+export default function Coworkingspace() {
+    const coworkingspaces = getCoworkingspaces()
 
     return (
         <main >
@@ -18,7 +17,7 @@ export default function Hospital() {
                 <div className="text-lg text-gray-500 font-light mt-24 text-center">
                     Click on the co-working space to see more details and book.
                 </div>
-                <HospitalCatalog hospitalsJson = {hospitals}/>
+                <CoworkingspaceCatalog coworkingspacesJson = {coworkingspaces}/>
             </Suspense>
         </main>
     )

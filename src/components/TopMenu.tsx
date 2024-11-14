@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
 import TopMenuItem from './TopMenuItem';
@@ -5,10 +7,29 @@ import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
 import Profile from './ProfileIcon';
+import  {useRole} from '@/providers/RoleProvider';
+import { useSession } from 'next-auth/react';
+import { useAppSelector } from '@/redux/store';
+import PurgeButton from './PurgeButton';
 
-export default async function TopMenu() {
-    const session = await getServerSession(authOptions);
 
+export default function TopMenu() {
+
+    const { data: session } = useSession();
+
+    const roleColor = useAppSelector( (state) => state.colorSlice )
+
+    // console.log('roleColor:',roleColor);
+
+    // const {roleColor} = useRole();
+    // const logoColor = roleColor === 'orange-500' ? 'text-orange-600' : 'text-blue-900';
+    // const textColor = roleColor === 'orange-500' ? 'text-orange-500' : 'text-blue-700';
+    // const bgColor = roleColor === 'orange-500' ? 'bg-orange-500' : 'bg-blue-700';
+    // const borderColor = roleColor === 'orange-500' ? 'border-orange-500' : 'border-blue-700';
+    // const hoverColor = roleColor === 'orange-500' ? 'hover:bg-orange-600' : 'hover:bg-blue-800';
+    // const hoverTextColor = roleColor === 'orange-500' ? 'hover:text-orange-500' : 'hover:text-blue-700';
+
+    
     return (
         <div className="h-20 bg-white fixed top-0 left-0 right-0 z-30 flex flex-row justify-start" >
 
@@ -19,8 +40,11 @@ export default async function TopMenu() {
             </Link>
 
 
-            <TopMenuItem title='Co-working space' pageRef='/booking'/>
-            <TopMenuItem title='My Booking' pageRef='/mybooking'/>
+            <TopMenuItem title='Co-working space' pageRef='/coworkingspace' hoverTextColor={roleColor.hoverTextColor}/>
+            <TopMenuItem title='My Booking' pageRef='/mybooking' hoverTextColor={roleColor.hoverTextColor}/>
+            <div className="flex flex-col justify-center">
+                <PurgeButton/>
+            </div>
             {/* <Link href="/">
                 <Image src={'/img/logo.png'} className='h-[100%] w-auto p-[3px] hover:bg-gray-400' alt='logo' width={0} height={0} sizes='100vh'/>
             </Link> */}

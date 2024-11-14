@@ -1,27 +1,29 @@
-export interface HospitalItem {
+export interface CoworkingspaceItem {
     _id: string,
     name: string,
     address: string,
-    district: string,
+    operatingHours: string,
     province: string,
     postalcode: string,
     tel: string,
     picture: string,
-    __v: number,
     id: string
   }
   
-export interface HospitalJson {
+export interface CoworkingspaceJson {
     success: boolean,
     count: number,
     pagination: Object,
-    data: HospitalItem[]
+    data: CoworkingspaceItem[]
   }
 
 export interface BookingItem {
-    name: string;
-    surname: string;
+    _id: string;
+    bookingDate: string;
+    numOfRooms: number;
+    user: string;
+    coworkingspace: string;
+    createdAt: string;
+    __v: number;
     id: string;
-    hospital: string;
-    bookDate: string;
   }

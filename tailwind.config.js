@@ -8,5 +8,9 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  safelist: [
+    "text-orange-700",
+    "outline-orange-500",
+  ]
 }
 
