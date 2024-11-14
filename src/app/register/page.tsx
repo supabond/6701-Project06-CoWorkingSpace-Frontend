@@ -1,7 +1,10 @@
 'use client'
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { TextField, Typography, Box } from '@mui/material'
 import { nameValidate, telValidate, emailValidate, passwordValidate } from '@/libs/userValidate'
+import userRegister from '@/libs/userRegister'
+import { signIn } from 'next-auth/react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -70,20 +73,33 @@ export default function page() {
         }
     }
 
-    const handleRegister = (e: React.FormEvent) => {
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault()
         if (nameError || telError || emailError || passwordError) {
             toast.error('Invalid input')
         } else {
-            // Call API to register (Later)
-            toast.success('Register success')
-            clearForm()
+            const res = await userRegister(name, email, tel, password)
+
+            if (res?.error) {
+                toast.error('Register failed')
+                return
+            } else {
+                toast.success('Register success')
+                clearForm()
+
+                await signIn('credentials', {
+                    email,
+                    password,
+                    redirect: false,
+                })
+                window.location.href = '/';
+            }
         }
     }
 
     return (
-    <div className="bg-white">
-        <Box className="flex flex-col items-center justify-center pb-[20%] h-screen">
+    <div className="bg-white h-screen relative">
+        <Box className="flex flex-col items-center justify-center pt-20">
             <h2 className='text-5xl font-bold text-blue-600 pb-12'>
                 Register
             </h2>
@@ -91,6 +107,7 @@ export default function page() {
                 <TextField
                     label='Name'
                     variant='outlined'
+                    required
                     value={name}
                     onChange={handleNameChange}
                     error={nameError !== ''}
@@ -99,6 +116,7 @@ export default function page() {
                 <TextField
                     label='Phone number'
                     variant='outlined'
+                    required
                     value={tel}
                     onChange={handleTelChange}
                     error={telError !== ''}
@@ -107,6 +125,7 @@ export default function page() {
                 <TextField
                     label='Email'
                     variant='outlined'
+                    required
                     value={email}
                     onChange={handleEmailChange}
                     error={emailError !== ''}
@@ -115,6 +134,7 @@ export default function page() {
                 <TextField
                     label='Password'
                     variant='outlined'
+                    required
                     type='password'
                     value={password}
                     onChange={handlePasswordChange}
@@ -126,7 +146,7 @@ export default function page() {
                 </button>
                 <div>
                     <Typography variant="body2" gutterBottom className='text-gray-500'>
-                        Already have an account? <a href='/login' className='text-blue-600'>Login</a>
+                        Already have an account? <Link href='/login' className='text-blue-600'>Login</Link>
                     </Typography>
                 </div>
             </form>

@@ -1,7 +1,9 @@
 'use client'
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { TextField, Typography, Box } from '@mui/material'
 import { emailValidate, passwordValidate } from '@/libs/userValidate'
+import { signIn } from 'next-auth/react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -40,21 +42,31 @@ export default function page() {
         }
     }
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         if (emailError || passwordError) {
             toast.error('Invalid email or password')
         } else {
-            // Call API to login (Later)
-            toast.success('Login success')
-            clearForm()
-            window.location.href = '/'
+            const res = await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+            })
+
+            if (res?.error) {
+                toast.error('Incorrect email or password')
+                return
+            } else {
+                toast.success('Login success')
+                clearForm()
+                window.location.href = '/';
+            }
         }
     }
 
     return (
-    <div className="bg-white">
-        <Box className="flex flex-col items-center justify-center pb-[20%] h-screen">
+    <div className="bg-white h-screen relative">
+        <Box className="flex flex-col items-center justify-center pt-20">
             <h2 className='text-5xl font-bold text-blue-600 pb-12'>
                 Login
             </h2>
@@ -83,7 +95,7 @@ export default function page() {
                 </button>
                 <div>
                     <Typography variant="body2" gutterBottom className='text-gray-500'>
-                        Don't have an account? <a href="/register" className='text-blue-700'>Register</a>
+                        Don't have an account? <Link href="/register" className='text-blue-700'>Register</Link>
                     </Typography>
                 </div>
             </form>

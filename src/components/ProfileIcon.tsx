@@ -1,5 +1,7 @@
 'use client'
 import React from 'react'
+import { signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
@@ -15,6 +17,8 @@ export default function Profile( { name } : { name: string }) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
+    const router = useRouter()
+
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
@@ -23,9 +27,14 @@ export default function Profile( { name } : { name: string }) {
         setAnchorEl(null);
     };
 
+    const handleLogout = async () => {
+        await signOut()
+        router.push('/')
+    }
+
     return (
-        <div>
-            <Tooltip title="Profile" className="absolute top-5 h-10 right-0 left-auto">
+        <div className="absolute top-1 right-20 py-2 px-2">
+            <Tooltip title="Profile" className="">
                 <IconButton
                     onClick={handleClick}
                     sx={{ ml: 2 }}
@@ -71,7 +80,7 @@ export default function Profile( { name } : { name: string }) {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                    <MenuItem onClick={handleClose} sx={{ width: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1 }}>
+                    <MenuItem onClick={handleClose} sx={{ width: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1, '&:hover': { backgroundColor: 'transparent' }, cursor: 'default' }}>
                         Hello,&nbsp;<span className="font-semibold">{name}</span>
                     </MenuItem>
                     <Link href='/profile'>
@@ -79,13 +88,15 @@ export default function Profile( { name } : { name: string }) {
                             Profile
                         </MenuItem>
                     </Link>
-                    <Divider sx={{ mt : .5 , mb: .5 }} />
+                    <Divider sx={{ mt : .5, mb: .5 }} />
+                    <button onClick={handleLogout} className="w-full">
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
                             <Logout fontSize="small" />
                         </ListItemIcon>
                         Logout
                     </MenuItem>
+                    </button>
             </Menu>
         </div>
 )

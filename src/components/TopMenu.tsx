@@ -1,10 +1,10 @@
-import React  from 'react';
+import React from 'react';
 import Image from 'next/image';
 import TopMenuItem from './TopMenuItem';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/authOptions';
-import Profile from './Profile';
+import Profile from './ProfileIcon';
 
 export default async function TopMenu() {
     const session = await getServerSession(authOptions);
@@ -13,8 +13,8 @@ export default async function TopMenu() {
         <div className="h-20 bg-white fixed top-0 left-0 right-0 z-30 flex flex-row justify-start" >
 
             <Link href="/">
-                <div className='flex items-center text-3xl ml-16 mr-12 font-bold h-full text-orange-600' >
-                    Co-WS
+                <div className='flex items-center ml-16 mr-12 h-full' >
+                    <Image src={'/img/logo.png'} alt='logo' width={100} height={100} sizes='100vh'/>
                 </div>
             </Link>
 
@@ -28,6 +28,7 @@ export default async function TopMenu() {
             {session ?
                 <Profile name={session.user.name}/>
                 :
+                <>
                 <div>
                     <Link href='/login'>
                         <div className = 'w-24 h-10 absolute top-5 right-48 bg-white text-orange-500 border-2 border-orange-500 flex justify-center items-center text-lg font-semibold py-2 px-2 rounded-2xl z-30 absolute hover:bg-orange-500 hover:text-white hover:border-none'>
@@ -40,6 +41,7 @@ export default async function TopMenu() {
                         </div>
                     </Link>
                 </div>
+                </>
             }
         </div>
     );

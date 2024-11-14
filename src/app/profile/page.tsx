@@ -1,28 +1,30 @@
 import React from 'react'
-import { TextField, Typography, Box } from '@mui/material'
+import { Typography, Box } from '@mui/material'
 
-export default function page() {
-    // Mocking user profile page
+import userMe from '@/libs/userMe';
+
+export default async function page() {
+    const res = await userMe();
+    const user = res.data;
 
     return (
-        <div className="bg-white">
-            <Box className="flex flex-col items-center justify-center pb-[20%] h-screen text-black">
-                <h2 className='text-5xl font-bold text-blue-600 pb-12'>
-                    Profile
-                </h2>
-                <Typography variant='h6' className='pb-4'>
-                    Name: John Doe
+    <div className="bg-white h-screen relative">
+        <Box className="flex flex-col items-center justify-center h-[70%] text-gray-900">
+            <h2 className="text-6xl font-extrabold text-blue-600 pb-12">
+                Profile
+            </h2>
+            <div className="bg-white p-8 rounded-xl shadow-2xl max-w-lg w-full">
+                <Typography variant="h6" className="pb-4 text-lg font-medium">
+                    Name: <span className="font-semibold">{user.name}</span>
                 </Typography>
-                <Typography variant='h6' className='pb-4'>
-                    Email: test@test.com
+                <Typography variant="h6" className="pb-4 text-lg font-medium">
+                    Email: <span className="font-semibold">{user.email}</span>
                 </Typography>
-                <Typography variant='h6' className='pb-4'>
-                    Phone: 0123456789
+                <Typography variant="h6" className="pb-4 text-lg font-medium">
+                    Telephone: <span className="font-semibold">{user.tel}</span>
                 </Typography>
-                <Typography variant='h6' className='pb-4'>
-                    Address: 123 Test Street
-                </Typography>
-            </Box>
-        </div>
+            </div>
+        </Box>
+    </div>
     )
 }
