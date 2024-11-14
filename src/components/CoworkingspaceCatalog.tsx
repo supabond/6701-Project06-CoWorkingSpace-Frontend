@@ -24,15 +24,15 @@ export default async function CoworkingspaceCatalog({ coworkingspacesJson }: { c
                 <div className='w-full h-[300px] bg-white border border-2 rounded-md border-gray-300 outline outline-2 outline-offset-4 outline-blue-700 flex justify-center items-center' >
                         {/* <AddCircleIcon fontSize="inherit" sx={{ width: '60%', height: '60%' }} color="primary"/> */}
                     <Link href="/coworkingspace/create" passHref className="flex justify-center itmes-center">
-                    <IconButton 
-                                sx={{
-                                    width: '60%',
-                                    height: '60%',
-                                    color: 'primary.main', // Color of icon
-                                    '&:hover': {
-                                    color: 'primary.dark', // Color of icon when hovered
-                                    },
-                                }}>
+                    <IconButton  
+                            sx={{
+                                width: '60%',
+                                height: '60%',
+                                color: '#1d4ed8', // bg-blue-700
+                                '&:hover': {
+                                    color: '#1E40AF', // bg-blue-900
+                                },
+                            }}>
                         <AddCircleOutlineIcon fontSize="large" sx={{ width: '100%', height: '100%' }}/>
                     </IconButton>
                     </Link>

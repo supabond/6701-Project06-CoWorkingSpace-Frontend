@@ -9,10 +9,10 @@ export default function Coworkingspace() {
     return (
         <main >
             <Suspense fallback={
-                <div className="flex flex-col item-center px-9 py-9">
-                    <div className='text-xl font-medium mb-5 text-center'>Loading ...</div>
-                    <LinearProgress/>
-                </div>
+               <div className="flex flex-col item-center ml-16 mr-12">
+                   <div className='text-lg text-gray-500 font-light mt-28 mb-6 text-center'>Loading ...</div>
+                   <LinearProgress style={{  backgroundColor: '#6b7280' }} sx={{ height:3, '& .MuiLinearProgress-bar': { backgroundColor: '#d1d5db' } }} />
+               </div>
                 }>
                 <div className="text-lg text-gray-500 font-light mt-24 text-center">
                     Click on the co-working space to see more details and book.

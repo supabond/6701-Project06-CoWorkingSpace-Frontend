@@ -1,5 +1,6 @@
 import { configureStore, combineReducers} from "@reduxjs/toolkit";
 import colorSlice from "./features/colorSlice";
+import cowsEditSlice from "./features/cowsEditSlice";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
@@ -31,7 +32,7 @@ const persistConfig = {
 
 }
 
-const rootReducer = combineReducers({ colorSlice} );
+const rootReducer = combineReducers({ colorSlice, cowsEditSlice} );
 const reduxPersistReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({

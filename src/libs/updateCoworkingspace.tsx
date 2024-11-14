@@ -1,7 +1,10 @@
-export default async function postCoworkingspace(name:string, address:string, operatingHours:string, province:string, postalCode:string, tel:string, picture:string, token:string) {
+export default async function updateCoworkingspace(cowokingspaceId:string, name:string, address:string, operatingHours:string, province:string,
+    postalCode:string, tel:string, picture:string, token:string) 
+ {
     
-    const response = await fetch( `http://localhost:5555/api/v1/coworkingspaces` ,{
-        method: 'POST',
+    const dummy_coworkingspace = '6724d1163b3649fca966d9e7';
+    const response = await fetch( `http://localhost:5555/api/v1/coworkingspaces/${cowokingspaceId}` ,{
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
@@ -18,5 +21,6 @@ export default async function postCoworkingspace(name:string, address:string, op
         }),
    
     })
+
     return await response.json();
 }

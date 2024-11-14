@@ -8,6 +8,7 @@ import  {useRole} from '@/providers/RoleProvider';
 import { useSession } from 'next-auth/react';
 import { useAppSelector } from '@/redux/store';
 import PurgeButton from './PurgeButton';
+import ToggleColorButton from './ToggleColorButton';
 
 export default function TopMenu() {
 
@@ -38,8 +39,14 @@ export default function TopMenu() {
 
             <TopMenuItem title='Co-working space' pageRef='/coworkingspace' hoverTextColor={roleColor.hoverTextColor}/>
             <TopMenuItem title='My Booking' pageRef='/mybooking' hoverTextColor={roleColor.hoverTextColor}/>
+            <div className="flex flex-row w-[20%] space-x-5">
+
             <div className="flex flex-col justify-center">
                 <PurgeButton/>
+            </div>
+            <div className="flex flex-col justify-center">
+                <ToggleColorButton/>
+            </div>
             </div>
             {/* <Link href="/">
                 <Image src={'/img/logo.png'} className='h-[100%] w-auto p-[3px] hover:bg-gray-400' alt='logo' width={0} height={0} sizes='100vh'/>
