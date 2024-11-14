@@ -49,6 +49,7 @@ export default function Profile( { name } : { name: string }) {
                 id="account-menu"
                 open={open}
                 onClose={handleClose}
+                disableScrollLock={true}
                 slotProps={{
                     paper: {
                         elevation: 0,
@@ -99,5 +100,5 @@ export default function Profile( { name } : { name: string }) {
                     </button>
             </Menu>
         </div>
-)
+    )
 }

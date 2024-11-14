@@ -11,7 +11,7 @@ type ColorState = {
     outlineColor: string;
 };
 
-const initialState: ColorState = {
+const orangeState: ColorState = {
     textColor: 'text-orange-500',
     textDarkColor: 'text-orange-700',
     logoColor: 'text-orange-600',
@@ -22,7 +22,7 @@ const initialState: ColorState = {
     outlineColor: 'outline-orange-500',
 };
 
-const alternateState: ColorState = {
+const blueState: ColorState = {
     textColor: 'text-blue-700',
     textDarkColor: 'text-blue-900',
     logoColor: 'text-blue-800',
@@ -35,13 +35,19 @@ const alternateState: ColorState = {
 
 export const colorSlice = createSlice({
     name: "color",
-    initialState,
+    initialState: orangeState,
     reducers: {
         toggleColor: (state) => {
-            return state.textColor === initialState.textColor ? alternateState : initialState;
+            return state.textColor === orangeState.textColor ? blueState : orangeState;
         },
+        setOrange: (state) => {
+            return orangeState;
+        },
+        setBlue: (state) => {
+            return blueState;
+        }
     },
 });
 
-export const { toggleColor } = colorSlice.actions;
+export const { toggleColor, setOrange, setBlue } = colorSlice.actions;
 export default colorSlice.reducer;

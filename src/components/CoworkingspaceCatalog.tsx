@@ -8,6 +8,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { getServerSession } from "next-auth";
 import { authOptions } from "../app/api/auth/[...nextauth]/authOptions";
 import getUserProfile from "@/libs/getUserProfile";
+import AddCoworkingspaceButton from "./AddCoworkingspaceButton";
 
 export default async function CoworkingspaceCatalog({ coworkingspacesJson }: { coworkingspacesJson: Promise<CoworkingspaceJson> }) {
     const coworkingspacesJsonReady = await coworkingspacesJson
@@ -21,22 +22,7 @@ export default async function CoworkingspaceCatalog({ coworkingspacesJson }: { c
         <div>
             <div className="px-16 py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {(profile && profile.data.role === 'admin')?
-                <div className='w-full h-[300px] bg-white border border-2 rounded-md border-gray-300 outline outline-2 outline-offset-4 outline-blue-700 flex justify-center items-center' >
-                        {/* <AddCircleIcon fontSize="inherit" sx={{ width: '60%', height: '60%' }} color="primary"/> */}
-                    <Link href="/coworkingspace/create" passHref className="flex justify-center itmes-center">
-                    <IconButton  
-                            sx={{
-                                width: '60%',
-                                height: '60%',
-                                color: '#1d4ed8', // bg-blue-700
-                                '&:hover': {
-                                    color: '#1E40AF', // bg-blue-900
-                                },
-                            }}>
-                        <AddCircleOutlineIcon fontSize="large" sx={{ width: '100%', height: '100%' }}/>
-                    </IconButton>
-                    </Link>
-                </div>
+               <AddCoworkingspaceButton/>
                 :null
             }
             {coworkingspacesJsonReady.data.map((coworkingspaceItem)=>(

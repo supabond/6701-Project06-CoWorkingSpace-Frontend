@@ -8,7 +8,7 @@ export default async function userMe() {
         throw new Error('No session found');
     }
 
-    const res = await fetch('http://localhost:5000/api/v1/auth/me', {
+    const res = await fetch('http://localhost:5555/api/v1/auth/me', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

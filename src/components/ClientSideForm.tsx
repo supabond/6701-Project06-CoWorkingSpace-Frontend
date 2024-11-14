@@ -8,11 +8,13 @@ import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } 
 import postCoworkingspace from "@/libs/postCoworkingspace";
 import { revalidateTag } from "next/cache";
 import { useRouter } from 'next/navigation';
+import { useAppSelector } from "@/redux/store";
 
 export default function ClientSideForm({ token }: { token: string }) {
     const [showModal, setShowModal] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
+    const roleColor = useAppSelector((state) => state.colorSlice);
 
     const handleCreateCoworkingspace = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -107,9 +109,9 @@ export default function ClientSideForm({ token }: { token: string }) {
                     <Button
                         type="submit"
                         name="Create coworkingspace"
-                        className={'w-[100%] h-[80%] block px-3 py-2 mt-5 text-white hover:bg-blue-800'}
+                        className={`w-[100%] h-[80%] block px-3 py-2 mt-5 bg-green-300 text-white ${roleColor.hoverBgColor}`}
                         variant="contained"
-                        sx={{ backgroundColor: "#1d4ed8" }}
+                        sx={{ backgroundColor: (roleColor.bgColor==="bg-blue-700")? "#1d4ed8" : "#f97316"}}
                     >
                         <div>Create<SendIcon className="ml-3" /></div>
                     </Button>

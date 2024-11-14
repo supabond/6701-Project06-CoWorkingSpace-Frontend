@@ -143,7 +143,7 @@ export default function BookingSection({token, cid}:{token:string, cid:string}) 
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setShowModal(false)} color="primary" sx={{ textTransform: 'none', color: '#F97316' }}>
+                        <Button onClick={() => setShowModal(false)} color="primary" sx={{ textTransform: 'none' }}>
                             Close
                         </Button>
                     </DialogActions>
