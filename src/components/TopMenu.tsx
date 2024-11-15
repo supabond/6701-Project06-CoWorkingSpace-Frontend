@@ -16,12 +16,8 @@ export default function TopMenu() {
     const roleColor = useAppSelector((state) => state.colorSlice);
     const dispatch = useDispatch<AppDispatch>();
 
-    // State to track the selected color
-    const [selectedColor, setSelectedColor] = useState('orange'); // Default selected color
-
     const handleColorChange = (event: SelectChangeEvent<string>) => {
         const color = event.target.value as string;
-        setSelectedColor(color);
         if (color === 'orange') {
             dispatch(setOrange());
         } else {
@@ -44,50 +40,47 @@ export default function TopMenu() {
                     <FormControl
                         variant="outlined"
                         size="small"
-                        
                         sx={{
-                        width: 120,
-                        marginTop: 0,
-                        paddingTop: 0,
-                        
-                        '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'transparent',
-                        },
+                            width: 120,
+                            marginTop: 0,
+                            paddingTop: 0,
+                            '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                borderColor: 'transparent',
+                            },
                         }}
                     >
                         <Select
-                        id="color-select"
-                        value={selectedColor}
-                        onChange={handleColorChange}
-                        displayEmpty
-                        MenuProps={{
-                            disableScrollLock: true,
-                        }}
-                        sx={{
-                            padding: 0,
-                            backgroundColor: selectedColor === 'orange' ? '#fed7aa' : '#bfdbfe', // Light orange and light blue
-                            borderRadius: 10,
-                        }}
+                            id="color-select"
+                            value={roleColor.bgColor === 'bg-orange-500' ? 'orange' : 'blue'}
+                            onChange={handleColorChange}
+                            displayEmpty
+                            MenuProps={{
+                                disableScrollLock: true,
+                            }}
+                            sx={{
+                                padding: 0,
+                                backgroundColor: roleColor.bgColor === 'bg-orange-500' ? '#fed7aa' : '#bfdbfe', // Light orange and light blue
+                                borderRadius: 10,
+                            }}
                         >
-                        <MenuItem value="orange">Orange</MenuItem>
-                        <MenuItem value="blue">Blue</MenuItem>
+                            <MenuItem value="orange">Orange</MenuItem>
+                            <MenuItem value="blue">Blue</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
             </div>
-
 
             {session ? (
                 <Profile name={session.user.name} />
             ) : (
                 <div>
                     <Link href="/login">
-                        <div className = {`w-24 h-10 absolute top-5 right-48 bg-white ${roleColor.textColor} border-2 ${roleColor.borderColor} flex justify-center items-center text-lg font-semibold py-2 px-2 rounded-2xl z-30 absolute ${roleColor.hoverBgColor} hover:text-white hover:border-none`}>
+                        <div className={`w-24 h-10 absolute top-5 right-48 bg-white ${roleColor.textColor} border-2 ${roleColor.borderColor} flex justify-center items-center text-lg font-semibold py-2 px-2 rounded-2xl z-30 absolute ${roleColor.hoverBgColor} hover:text-white hover:border-none`}>
                             Login
                         </div>
                     </Link>
                     <Link href="/register">
-                    <div className = {`w-24 h-10 absolute top-5 right-12 ${roleColor.bgColor} flex justify-center items-center text-white text-lg font-semibold py-2 px-2 rounded-2xl z-30 absolute ${roleColor.hoverBgColor}`}>
+                        <div className={`w-24 h-10 absolute top-5 right-12 ${roleColor.bgColor} flex justify-center items-center text-white text-lg font-semibold py-2 px-2 rounded-2xl z-30 absolute ${roleColor.hoverBgColor}`}>
                             Register
                         </div>
                     </Link>
