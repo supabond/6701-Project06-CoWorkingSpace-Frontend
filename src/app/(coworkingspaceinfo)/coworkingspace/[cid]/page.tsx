@@ -27,8 +27,8 @@ export default async function CoworkingspaceInformation( {params}:{ params: {cid
 
     return (
         <main className="w-[100%] flex flex-col items-center p-2.5">
-            <div className="text-xl text-gray-500 mt-12 mb-5 font-light text-center">
-                    Co-working space detail and booking
+            <div className="text-lg text-gray-500 mt-20 mb-5 font-light text-center">
+                    Co-working space details and booking
             </div>
             {
             (profile && profile.data.role === 'admin')?
