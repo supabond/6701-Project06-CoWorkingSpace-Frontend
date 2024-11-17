@@ -1,37 +1,67 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import getBooking from '@/libs/getBooking';
+import updateBooking from '@/libs/updateBooking';
 import deleteBooking from '@/libs/deleteBooking';
 import { IconButton } from '@mui/material';
 import { BookingItem } from '../../interfaces';
 import BookingCard from './BookingCard';
+import Oval from 'react-loading';
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function BookingList() {
     const [bookingItems, setBookingItems] = useState<BookingItem[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             try {
                 const res = await getBooking();
-                console.log(res);
                 setBookingItems(res.data);
+                setIsLoading(false);
             } catch (error) {
                 console.error('Error fetching bookings:', error);
+                setIsLoading(false);
             }
         };
 
         fetchData();
     }, []);
 
+    const handleEdit = async (updatedBooking: BookingItem) => {
+        try {
+            await updateBooking(updatedBooking);
+            setBookingItems((prevItems) => prevItems.map((item) => (item._id === updatedBooking._id ? updatedBooking : item)));
+            toast.success('Booking updated');
+        } catch (error) {
+            toast.error('Error updating booking');
+        }
+    }
+
     const handleDelete = async (id: string) => {
         try {
             await deleteBooking(id);
-            
             setBookingItems((prevItems) => prevItems.filter(item => item._id !== id));
+            toast.success('Booking deleted');
         } catch (error) {
-            console.error('Error deleting booking:', error);
+            toast.error('Error deleting booking');
         }
     };
+
+    if (isLoading) {
+        return (
+        <div className="flex justify-center pt-20">
+            <Oval
+                color="#0000FF"
+                height={80}
+                width={80}
+                aria-label="Loading"
+            />
+        </div>
+        );
+    }
 
     return (
         <div className="flex justify-center pt-20">
@@ -58,12 +88,14 @@ export default function BookingList() {
                                     key={bookingItem._id}
                                     bookingItem={bookingItem}
                                     onDelete={handleDelete}
+                                    onEdit={handleEdit}
                                 />
                             ))}
                         </tbody>
                     </table>
                 </div>
             )}
+            <ToastContainer />
         </div>
     );
 }
