@@ -1,57 +1,69 @@
-// import { removeBooking } from "@/redux/features/colorSlice";
-// import { AppDispatch, useAppSelector } from "@/redux/store";
-// import { IconButton } from '@mui/material';
-// import { useDispatch } from "react-redux";
+'use client'
+import React, { useState, useEffect } from 'react';
+import getBooking from '@/libs/getBooking';
+import deleteBooking from '@/libs/deleteBooking';
+import { IconButton } from '@mui/material';
+import { BookingItem } from '../../interfaces';
+import BookingCard from './BookingCard';
 
-// export default function BookingList() {
-//     // const bookItems = useAppSelector((state) => state.bookSlice.bookItems);
-//     const dispatch = useDispatch<AppDispatch>();
+export default function BookingList() {
+    const [bookingItems, setBookingItems] = useState<BookingItem[]>([]);
 
-//     if (bookItems.length === 0) {
-//         return (
-//             <div className="flex flex-col items-center py-40">
-//                 <div className="text-xl text-gray-400">No Vaccine Booking</div>
-//             </div>
-//         )
-//     }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await getBooking();
+                console.log(res);
+                setBookingItems(res.data);
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
-//     return (
-//         <div className="flex flex-col items-center">
-//             <div className="w-[95%] flex flex-col items-center">
-//             <div className="w-full flex-grow overflow-y-auto" style={{ maxHeight: '500px' }}>
-//                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-//                         {bookItems.map((bookItem) => (
-//                             <div className="flex flex-col border-2 border-gray-300 rounded-lg shadow-md p-5 bg-white" key={bookItem.id}>
-//                                 <div className="grid grid-cols-[1fr_1fr] gap-2">
-//                                     <div className="font-bold">Name:</div>
-//                                     <div>{bookItem.name}</div>
-//                                     <div className="font-bold">Lastname:</div>
-//                                     <div>{bookItem.surname}</div>
-//                                     <div className="font-bold">CitizenID:</div>
-//                                     <div>{bookItem.id}</div>
-//                                     <div className="font-bold">Hospital:</div>
-//                                     <div>{bookItem.hospital}</div>
-//                                     <div className="font-bold">BookDate:</div>
-//                                     <div>{bookItem.bookDate}</div>
-//                                 </div>
-//                                 <div className="flex justify-end">
-//                                     <IconButton
-//                                         aria-label="delete"
-//                                         color="secondary"
-//                                         onClick={() => dispatch(removeBooking(bookItem.id))}
-//                                         className="hover:bg-gray-500 rounded-full p-1"
-//                                     >
-//                                         <img src='./img/icons8-delete-48.png' alt="Delete" width="24" height="24" />
-//                                     </IconButton>
-//                                 </div>
-//                             </div>
-//                         ))}
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
+    const handleDelete = async (id: string) => {
+        try {
+            await deleteBooking(id);
+            
+            setBookingItems((prevItems) => prevItems.filter(item => item._id !== id));
+        } catch (error) {
+            console.error('Error deleting booking:', error);
+        }
+    };
 
-
-//     );
-// }
+    return (
+        <div className="flex justify-center pt-20">
+            {bookingItems.length === 0 ? (
+                <h1 className="text-4xl text-center font-bold text-blue-700 p-3.5 text-[2.05rem]">
+                    No Coworking Space Booked
+                </h1>
+            ) : (
+                <div className="bg-white shadow-md rounded my-6 w-[80%]">
+                    <table className="min-w-max w-full table-auto">
+                        <thead>
+                            <tr className="bg-blue-200 text-gray-600 uppercase text-sm leading-normal">
+                                <th className="py-3 px-6 text-left">Coworking Space</th>
+                                <th className="py-3 px-6 text-left">Booking Date</th>
+                                <th className="py-3 px-6 text-left">Number of Rooms</th>
+                                <th className="py-3 px-6 text-left">User ID</th>
+                                <th className="py-3 px-6 text-left">Created At</th>
+                                <th className="py-3 px-6 text-left">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody className="text-gray-600 text-sm font-light">
+                            {bookingItems.map((bookingItem) => (
+                                <BookingCard
+                                    key={bookingItem._id}
+                                    bookingItem={bookingItem}
+                                    onDelete={handleDelete}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+        </div>
+    );
+}
