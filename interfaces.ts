@@ -22,7 +22,13 @@ export interface BookingItem {
     bookingDate: string;
     numOfRooms: number;
     user: string;
-    coworkingspace: string;
+    coworkingspace: {
+        _id: string;
+        name: string;
+        address: string;
+        tel: string;
+        id: string;
+    };
     createdAt: string;
     __v: number;
     id: string;
