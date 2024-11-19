@@ -81,12 +81,12 @@ export default function page() {
         if (nameError || telError || emailError || passwordError) {
             toast.error('Invalid input')
         } else {
-            const res = await userRegister(name, email, tel, password)
-
-            if (res?.error) {
-                toast.error('Register failed')
-                return
-            } else {
+            try {
+                const res = await userRegister(name, email, tel, password)
+                if (res?.error) {
+                    toast.error('Register failed')
+                    return
+                }
                 toast.success('Register success')
                 clearForm()
 
@@ -96,7 +96,14 @@ export default function page() {
                     redirect: false,
                 })
                 window.location.href = '/';
-            }
+            } catch (err) {
+                if ((err as any).message === 'User already exists') {
+                    toast.error('Email already exists')
+                } else {
+                    toast.error('Register failed')
+                }
+                return
+            } 
         }
     }
 

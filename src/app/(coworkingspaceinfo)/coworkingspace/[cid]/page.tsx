@@ -16,7 +16,7 @@ export default async function CoworkingspaceInformation( {params}:{ params: {cid
     const profile = session? await getUserProfile(session?.user.token || ''): '';
 
     return (
-        <main className="w-[100%] flex flex-col items-center p-2.5">
+        <main className="w-[100%] flex flex-col items-center p-2.5 bg-white h-screen relative">
             <Suspense fallback={
                 <div className="flex flex-col item-center ml-16 mr-12">
                    <div className='text-lg text-gray-500 font-light mt-28 mb-6 text-center'>Loading ...</div>

@@ -14,7 +14,7 @@ export default async function CreateCoworkingspace() {
 
     return (
         (profile.data.role == "admin") ?
-            <main className="w-[100%] flex flex-col items-center mt-5">
+            <main className="w-[100%] flex flex-col items-center mt-5 bg-white h-screen relative">
                 <div className="text-lg text-gray-500 font-light mt-12 mb-8 text-center">
                     Provide coworking space information and submit.
                 </div>

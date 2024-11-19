@@ -51,7 +51,7 @@ export default function UserProfile({ token }: { token: string }) {
     return (
         <div className="bg-gray-100 h-screen flex items-center justify-center">
             <Container maxWidth="sm">
-                <Paper elevation={3} className="rounded-lg">
+                <Paper elevation={3} className="rounded-lg" style={{ borderRadius: '15px' }}>
                     <Box display="flex" flexDirection="column" alignItems="center">
                         <Avatar className = "mt-10" sx={{ bgcolor: avatarColor, width: 100, height: 100, mb: 2, fontSize: 40 }}>
                             {user.name.charAt(0).toUpperCase()}

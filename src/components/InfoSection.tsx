@@ -129,7 +129,7 @@ export default function InfoSection({ hospitalDetail, cid, token }: { hospitalDe
                             className="rounded-md"
                         />
                     </div>
-                    <div className="w-[45%] rounded-lg shadow-none bg-white border border-2 border-gray-400 flex-col py-5 px-10 space-y-2 min-h-[300px]">
+                    <div className="w-[45%] rounded-lg shadow-none bg-white border border-2 border-gray-400 flex-col py-5 px-10 space-y-2 min-h-[300px] text-black">
                         <div className={`h-[40px] flex items-center text-xl font-semibold ${roleColor.textColor} mb-4`}>Info</div>
                         <div className="text-sm flex flex-row">
                             <div className="w-[35%] font-medium">Name:</div>
@@ -169,7 +169,7 @@ export default function InfoSection({ hospitalDetail, cid, token }: { hospitalDe
                             className="rounded-md"
                         />
                     </div>
-                    <div className="w-[45%] rounded-lg shadow-none bg-white border border-2 border-gray-400 flex-col pt-5 pb-7  px-10 space-y-1 min-h-[300px]">
+                    <div className="w-[45%] rounded-lg shadow-none bg-white border border-2 border-gray-400 flex-col pt-5 pb-7  px-10 space-y-1 min-h-[300px] text-black">
 
                         <div className="mb-4 flex flex-row items-center justify-between">
                             <div className={`text-xl font-semibold ${roleColor.textColor}`}>Edit Info</div>

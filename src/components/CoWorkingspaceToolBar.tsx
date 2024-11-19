@@ -86,7 +86,7 @@ export default function CoworkingspaceToolBar({ cid, token }: { cid: string, tok
     };
 
     return (
-        <main className="w-[70%] h-[10%] flex flex-row justify-end">
+        <main className="w-[70%] flex flex-row justify-end">
             <button onClick={handleEditCoworkingSpace} className={`text-base text-gray-500 font-light ${hoverEditClassName}`}>Edit</button>
             <div className="px-4 text-gray-500">|</div>
             <button onClick={handleOpenModal} className={`text-base text-gray-500 font-light ${hoverDeleteClassName}`}>Delete</button>

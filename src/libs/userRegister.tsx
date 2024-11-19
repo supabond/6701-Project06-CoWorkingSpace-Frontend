@@ -16,7 +16,11 @@ export default async function userRegister(userName: string, userEmail:string, u
     })
 
     if (!res.ok) {
-        throw new Error('Register failed');
+        if (res.status === 400) {
+            throw new Error('User already exists');
+        } else {
+            throw new Error('Register failed');
+        }
     }
 
     return await res.json();
