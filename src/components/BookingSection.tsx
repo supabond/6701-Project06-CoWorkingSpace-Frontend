@@ -1,19 +1,17 @@
 'use client';
-
 import { useState } from "react";
 import { MobileDatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs, { Dayjs } from "dayjs";
-import { useRouter } from "next/router";
 import postBooking from "@/libs/postBooking";
 import { Slider } from "@mui/material";
 import { useAppSelector } from "@/redux/store";
-// import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import SendIcon from "@mui/icons-material/Send";
 import BookIcon from '@mui/icons-material/Book';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BookingSection({token, cid}:{token:string, cid:string}) {
     const [bookDate, setBookDate] = useState<Dayjs | null>(dayjs());
@@ -49,9 +47,13 @@ export default function BookingSection({token, cid}:{token:string, cid:string}) 
             if (success) {
                 setLoading(false);
                 setCompleted(true);
+                toast.success('Booking successful');
                 setTimeout(() => {
                     setCompleted(false);
+                    
+
                 }, 2000); // Change back to original text after 2 seconds
+                
             }
         } catch (error) {
             console.error("Booking failed:", error);
@@ -150,6 +152,7 @@ export default function BookingSection({token, cid}:{token:string, cid:string}) 
                 </Dialog>
             )}
         
+        <ToastContainer />
         </div>
     )
 

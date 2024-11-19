@@ -6,9 +6,10 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import postCoworkingspace from "@/libs/postCoworkingspace";
-import { revalidateTag } from "next/cache";
 import { useRouter } from 'next/navigation';
 import { useAppSelector } from "@/redux/store";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ClientSideForm({ token }: { token: string }) {
     const [showModal, setShowModal] = useState(false);
@@ -40,14 +41,22 @@ export default function ClientSideForm({ token }: { token: string }) {
                     },
                     body: JSON.stringify({ tags: ['coworkingspace', 'coworkingspaces'] }),
                 });
+
+                
+
+                toast.success('Coworkingspace created successfully');
+                setTimeout(() => { 
+                    if (revalidateResponse.ok) {
+                        console.log('Revalidation successful');
+                        router.push('/coworkingspace');
+                        router.refresh();
+                    } else {
+                        console.error('Failed to revalidate:', revalidateResponse.statusText);
+                    }
+
+                }, 2000);
+
     
-                if (revalidateResponse.ok) {
-                    console.log('Revalidation successful');
-                    router.push('/coworkingspace');
-                    router.refresh();
-                } else {
-                    console.error('Failed to revalidate:', revalidateResponse.statusText);
-                }
             } else {
                 console.error('Failed to create coworking space:', response);
                 setErrorMessage(response.message.message);
@@ -62,6 +71,7 @@ export default function ClientSideForm({ token }: { token: string }) {
 
     return (
         <>
+            <ToastContainer />
             <form onSubmit={handleCreateCoworkingspace} className="w-[70%] justify-center px-2 py-16 grid grid-cols-[40%_40%] gap-y-8 gap-x-20 border border-2 rounded-lg">
                 <div>
                     <div className="text-md text-left text-black font-semibold">

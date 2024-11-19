@@ -1,10 +1,7 @@
 'use client'
 
 import Image from 'next/image';
-import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import { useRole } from '@/providers/RoleProvider';
 import { useAppSelector } from '@/redux/store';
 
 
@@ -21,9 +18,7 @@ export default function Banner() {
                 <Image src='/img/5541.jpg' 
                 alt='cover' 
                 fill={true} 
-                priority
-                objectFit='cover'
-                // objectPosition='right'
+                className='object-cover'
                 />
             </div>
 

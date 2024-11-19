@@ -1,5 +1,7 @@
 export default async function getCoworkingspace(id:string) {
-    const response = await fetch(`http://localhost:5555/api/v1/coworkingspaces/${id}`,  {
+
+
+    const response = await fetch(`${process.env.BACKEND_URL}/api/v1/coworkingspaces/${id}`,  {
         next: {
             tags : ['coworkingspace']
         }

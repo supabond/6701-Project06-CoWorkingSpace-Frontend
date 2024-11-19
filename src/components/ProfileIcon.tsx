@@ -11,13 +11,15 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
-import { blue } from '@mui/material/colors';
+import { useAppSelector } from '@/redux/store';
 
 export default function Profile( { name } : { name: string }) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
     const router = useRouter()
+    const roleColor = useAppSelector((state) => state.colorSlice);
+    const avatarColor = (roleColor.bgColor === 'bg-orange-500') ? '#f97316' : '#1d4ed8';
 
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -41,7 +43,7 @@ export default function Profile( { name } : { name: string }) {
                     aria-controls={open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}>
-                        <Avatar sx={{ bgcolor: blue[700], width: 42, height: 42 }}>{name.charAt(0).toUpperCase()}</Avatar>
+                        <Avatar sx={{ bgcolor: avatarColor , width: 42, height: 42 }}>{name.charAt(0).toUpperCase()}</Avatar>
                 </IconButton>
             </Tooltip>
             <Menu

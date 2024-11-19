@@ -6,12 +6,14 @@ import { emailValidate, passwordValidate } from '@/libs/userValidate'
 import { signIn } from 'next-auth/react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { useAppSelector } from '@/redux/store'
 
 export default function page() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+    const roleColor = useAppSelector((state) => state.colorSlice);
 
     const clearForm = () => {
         setEmail('')
@@ -66,8 +68,8 @@ export default function page() {
 
     return (
     <div className="bg-white h-screen relative">
-        <Box className="flex flex-col items-center justify-center pt-20">
-            <h2 className='text-5xl font-bold text-blue-600 pb-12'>
+        <Box className="flex flex-col items-center justify-center pt-32">
+            <h2 className={`text-5xl font-bold ${roleColor.logoColor} pb-12`}>
                 Login
             </h2>
             <form onSubmit={handleLogin} className='flex flex-col space-y-4 w-[30%]'>
@@ -90,7 +92,7 @@ export default function page() {
                     error={passwordError !== ''}
                     helperText={passwordError}
                 />
-                <button className='bg-orange-500 text-white text-lg font-semibold py-2 px-2 rounded-2xl text-center hover:bg-orange-600 mt-4' type="submit">
+                <button className={`${roleColor.bgColor} text-white text-lg font-semibold py-2 px-2 rounded-2xl text-center ${roleColor.hoverBgColor} mt-4 `} type="submit">
                     Login
                 </button>
                 <div>

@@ -1,10 +1,10 @@
 import getCoworkingspaces from "@/libs/getCoworkingspaces"
-import { Suspense, useEffect } from "react"
+import { Suspense } from "react"
 import { LinearProgress } from "@mui/material"
 import CoworkingspaceCatalog from "@/components/CoworkingspaceCatalog"
-
-export default function Coworkingspace() {
-    const coworkingspaces = getCoworkingspaces()
+import { CoworkingspaceJson } from "../../../../interfaces"
+export default async function Coworkingspace() {
+    const coworkingspaces: CoworkingspaceJson = await getCoworkingspaces()
 
     return (
         <main >

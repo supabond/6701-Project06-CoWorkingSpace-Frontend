@@ -6,7 +6,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
-import { RoleProvider } from "@/providers/RoleProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

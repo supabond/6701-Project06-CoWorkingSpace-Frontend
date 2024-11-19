@@ -33,6 +33,9 @@ export const authOptions: AuthOptions = {
             }
           })
     ],
+    pages: {
+      signIn: '/login', // Custom sign-in page
+    },
     session: { strategy: "jwt" },
     callbacks: { 
         async redirect({ url, baseUrl }: { url: string; baseUrl: string }) {

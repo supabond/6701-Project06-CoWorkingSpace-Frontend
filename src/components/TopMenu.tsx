@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import TopMenuItem from './TopMenuItem';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 import { useAppSelector, AppDispatch } from '@/redux/store';
 import { useDispatch } from 'react-redux';
 import { setOrange, setBlue } from '../redux/features/colorSlice';
-import { Select, MenuItem, FormControl, InputLabel, SelectChangeEvent } from '@mui/material';
+import { Select, MenuItem, FormControl, SelectChangeEvent } from '@mui/material';
 import Profile from './ProfileIcon';
 
 export default function TopMenu() {

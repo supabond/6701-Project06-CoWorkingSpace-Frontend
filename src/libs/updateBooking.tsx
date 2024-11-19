@@ -10,7 +10,7 @@ export default async function updateBooking(updatedBooking: BookingItem) {
         throw new Error('No session found');
     }
 
-    const res = await fetch(`http://localhost:5555/api/v1/bookings/${updatedBooking._id}`, {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/bookings/${updatedBooking._id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

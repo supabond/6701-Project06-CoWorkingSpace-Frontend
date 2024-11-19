@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { resetEditState } from "@/redux/features/cowsEditSlice";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from "@mui/material";
 
+
 export default function CoworkingspaceToolBar({ cid, token }: { cid: string, token: string }) {
     const cowsEdit = useAppSelector((state) => state.cowsEditSlice);
     const dispatch = useDispatch<AppDispatch>();
@@ -53,10 +54,13 @@ export default function CoworkingspaceToolBar({ cid, token }: { cid: string, tok
                     body: JSON.stringify({ tags: ['coworkingspace', 'coworkingspaces'] }),
                 });
     
+                
                 if (revalidateResponse.ok) {
                     console.log('Revalidation successful');
                     router.push('/coworkingspace');
                     router.refresh();
+                    // window.location.href = '/coworkingspace';
+
                 } else {
                     console.error('Failed to revalidate:', revalidateResponse.statusText);
                 }
@@ -86,7 +90,6 @@ export default function CoworkingspaceToolBar({ cid, token }: { cid: string, tok
             <button onClick={handleEditCoworkingSpace} className={`text-base text-gray-500 font-light ${hoverEditClassName}`}>Edit</button>
             <div className="px-4 text-gray-500">|</div>
             <button onClick={handleOpenModal} className={`text-base text-gray-500 font-light ${hoverDeleteClassName}`}>Delete</button>
-
             <Dialog
                 open={showModal}
                 onClose={handleCloseModal}
@@ -108,6 +111,7 @@ export default function CoworkingspaceToolBar({ cid, token }: { cid: string, tok
                 </Button>
                 </DialogActions>
             </Dialog>
+
         </main>
     );
 }

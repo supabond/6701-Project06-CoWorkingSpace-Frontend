@@ -9,7 +9,7 @@ export default async function getBooking() {
         throw new Error('No session found');
     }
 
-    const res = await fetch('http://localhost:5555/api/v1/bookings', {
+    const res = await fetch(`${process.env.BACKEND_URL}/api/v1/bookings`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

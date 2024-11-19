@@ -93,8 +93,9 @@ export default function InfoSection({ hospitalDetail, cid, token }: { hospitalDe
                     body: JSON.stringify({ tags: ['coworkingspace', 'coworkingspaces'] }),
                 });
 
+
                 if (revalidateResponse.ok) {
-                    console.log('Revalidation successful');
+                    // console.log('Revalidation successful');
                     router.push(`/coworkingspace/${cid}`);
                     router.refresh();
                 } else {
@@ -114,6 +115,8 @@ export default function InfoSection({ hospitalDetail, cid, token }: { hospitalDe
 
     return (
         <>
+
+        
             {(!cowsEdit.isEdit) ?
                 <div className="flex flex-row w-[70%] justify-center space-x-10 mt-3 mb-5">
                     <div className="w-[55%] relative h-auto rounded-lg shadow-none bg-white border border-2 border-gray-400">
@@ -278,6 +281,8 @@ export default function InfoSection({ hospitalDetail, cid, token }: { hospitalDe
                     </Button>
                 </DialogActions>
             </Dialog>
+        
+
         </>
     );
 }

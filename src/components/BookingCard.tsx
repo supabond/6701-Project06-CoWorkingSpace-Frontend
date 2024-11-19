@@ -57,11 +57,11 @@ export default function BookingCard({ bookingItem, onDelete, onEdit }: { booking
           <td className="py-3 px-6 text-left">
             {new Date(bookingItem.createdAt).toLocaleDateString()}
           </td>
-          <td className="py-3 px-6 text-left">
-            <Button variant="contained" color="primary" size="small" endIcon={<SaveIcon />} onClick={handleSaveClick}>
+          <td className="py-3 px-6 text-left space-x-2">
+            <Button className="w-[45%] " variant="contained" color="primary" size="small" endIcon={<SaveIcon />} onClick={handleSaveClick}>
               Save
             </Button>
-            <Button variant="contained" color="error" size="small" endIcon={<CancelIcon />} onClick={handleCancelClick}>
+            <Button className="w-[50%]" variant="contained" color="error" size="small" endIcon={<CancelIcon />} onClick={handleCancelClick}>
               Cancel
             </Button>
           </td>

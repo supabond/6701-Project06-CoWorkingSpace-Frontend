@@ -1,16 +1,12 @@
-import { useReducer } from "react"
 import Card from "./Card"
 import Link from "next/link"
-import { CoworkingspaceJson, CoworkingspaceItem } from "../../interfaces"
-import IconButton from '@mui/material/IconButton';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import { CoworkingspaceJson } from "../../interfaces"
 import { getServerSession } from "next-auth";
 import { authOptions } from "../app/api/auth/[...nextauth]/authOptions";
 import getUserProfile from "@/libs/getUserProfile";
 import AddCoworkingspaceButton from "./AddCoworkingspaceButton";
 
-export default async function CoworkingspaceCatalog({ coworkingspacesJson }: { coworkingspacesJson: Promise<CoworkingspaceJson> }) {
+export default async function CoworkingspaceCatalog({ coworkingspacesJson }: { coworkingspacesJson: CoworkingspaceJson }) {
     const coworkingspacesJsonReady = await coworkingspacesJson
     const session = await getServerSession(authOptions);
     

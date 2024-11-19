@@ -1,7 +1,6 @@
 export default async function postBooking(bookingDate:string, numOfRooms:number, coworkingspace:string, createdAt:string, token:string) {
     
-    const dummy_coworkingspace = '6724d1163b3649fca966d9e7';
-    const response = await fetch( `http://localhost:5555/api/v1/coworkingspaces/${coworkingspace}/bookings` ,{
+    const response = await fetch( `${process.env.BACKEND_URL}/api/v1/coworkingspaces/${coworkingspace}/bookings` ,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
